@@ -23,8 +23,8 @@ const App = () => {
 
     const credentials = {
         region: 'us-east-1',
-        accessKeyId: "AKIAZSLS3RLMTWWI2H5J",
-        secretAccessKey: "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"
+        accessKeyId: "",
+        secretAccessKey: ""
     }
 
     var dynamodb = new AWS.DynamoDB(credentials);
