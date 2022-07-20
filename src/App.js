@@ -15,6 +15,7 @@ const App = () => {
     const [useCaseName, setUseCaseName] = useState('')
     const [usecaseList, setUsecaseList] = useState([]);
     const [selectedUsecaseData, setSelectedUsecaseData] = useState({})
+    const [loading, setLoading] = useState(false)
 
     // let executedStateArr = []
     const [newStateToStart, setnewStateToStart] = useState('')
@@ -22,8 +23,8 @@ const App = () => {
 
     const credentials = {
         region: 'us-east-1',
-        accessKeyId: "ACCESS_KEY",
-        secretAccessKey: "SECRET_ACCESS_KEY"
+        accessKeyId: "AKIAZSLS3RLMTWWI2H5J",
+        secretAccessKey: "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"
     }
 
     var dynamodb = new AWS.DynamoDB(credentials);
@@ -152,6 +153,7 @@ const App = () => {
         };
 
         dynamodb.getItem(params, function (err, data) {
+            setLoading(true);
             if (err) console.log(err, err.stack); // an error occurred
             else {
 
@@ -166,9 +168,15 @@ const App = () => {
                         else console.log(data);           // successful response
                     });
                 }
+
                 setTimeout(() => {
                     gettingExecutionHistory(currentExecutionArn);
                 }, 1000);
+
+                setTimeout(() => {
+                    setLoading(false)
+                }, 1600);
+
             };
         });
     }
@@ -346,6 +354,7 @@ const App = () => {
                             {executedStateArr.map(item => {
                                 return <li key={item}>{item}</li>
                             })}
+                            { loading && <h6 className='mt-1' style={{ color: "green" }}>Loading...</h6>}
                         </ul>
                     </div>
                 </div>
