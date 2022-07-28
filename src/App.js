@@ -142,7 +142,7 @@ const App = () => {
     }
 
     function completeState() {
-
+        setLoading(true);
         var params = {
             TableName: "stepfunction-uc1-2",
             Key: {
@@ -153,7 +153,7 @@ const App = () => {
         };
 
         dynamodb.getItem(params, function (err, data) {
-            setLoading(true);
+            // setLoading(true);
             if (err) console.log(err, err.stack); // an error occurred
             else {
 
@@ -173,9 +173,9 @@ const App = () => {
                     gettingExecutionHistory(currentExecutionArn);
                 }, 1000);
 
-                setTimeout(() => {
-                    setLoading(false)
-                }, 1600);
+                // setTimeout(() => {
+                //     setLoading(false)
+                // }, 1600);
 
             };
         });
@@ -229,7 +229,8 @@ const App = () => {
 
     function gettingExecutionHistory(executionArn) {
         var paramsforhistory = {
-            executionArn: executionArn
+            executionArn: executionArn,
+            maxResults: '1000',
         };
         stepfunctions.getExecutionHistory(paramsforhistory, function (err, data) {
             if (err) console.log(err, err.stack); // an error occurred
@@ -242,6 +243,7 @@ const App = () => {
                 });
                 setexecutedStateArr(executedStateArray);
                 console.log("executedStateArr",data);
+                setLoading(false);
             }           // successful response
         });
     }
