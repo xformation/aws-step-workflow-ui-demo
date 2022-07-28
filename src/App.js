@@ -23,8 +23,8 @@ const App = () => {
 
     const credentials = {
         region: 'us-east-1',
-        accessKeyId: "",
-        secretAccessKey: ""
+        accessKeyId: process.env.REACT_APP_ACCESS_KEY_ID,
+        secretAccessKey: process.env.REACT_APP_SECRET_ACCESS_KEY 
     }
 
     var dynamodb = new AWS.DynamoDB(credentials);
@@ -40,6 +40,7 @@ const App = () => {
         input: "[]"
     };
 
+    
     function usecaseArnToDynamoDb(arn) {
 
         var paramsForDb = {
