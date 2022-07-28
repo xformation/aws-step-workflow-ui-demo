@@ -240,7 +240,8 @@ const App = () => {
                         executedStateArray.push(e.stateEnteredEventDetails.name);
                     }
                 });
-                setexecutedStateArr(executedStateArray)
+                setexecutedStateArr(executedStateArray);
+                console.log("executedStateArr",data);
             }           // successful response
         });
     }
@@ -307,6 +308,7 @@ const App = () => {
             }
         });
     }
+
     useEffect(() => {
         pageUpdateFunc();
         getUsecaseInputData();
@@ -320,6 +322,11 @@ const App = () => {
     useEffect(() => {
         gettingMachineDef();
     }, [currentExecutionArn, machineStates, executedStateArr])
+
+    useEffect(() => {
+       
+    }, [executedStateArr])
+    
 
     return (
         <>
